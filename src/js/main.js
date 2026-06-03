@@ -88,15 +88,15 @@ document.getElementById('ticketType').addEventListener('click', () => {
 var radios = document.forms["ticketType"].elements["ticket"];
 function getTicket() {
     if (basic.checked) {
-        picks.setAttribute('placeholder', '## ## ##');
+        picks.setAttribute('placeholder', '# # #');
         picks.value = '';
         ticket = 0;
     } else if (standard.checked) {
-        picks.setAttribute('placeholder', '## ## ## ## ##');
+        picks.setAttribute('placeholder', '# # # # #');
         picks.value = '';
         ticket = 1;
     } else if (mega.checked) {
-        picks.setAttribute('placeholder', '## ## ## ## ## ##');
+        picks.setAttribute('placeholder', '# # # # # #');
         picks.value = '';
         ticket = 2;
     }
