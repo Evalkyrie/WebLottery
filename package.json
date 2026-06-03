@@ -1,0 +1,24 @@
+{
+  "name": "weblottery",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/clynch37/WebLottery#readme",
+  "bugs": {
+    "url": "https://github.com/clynch37/WebLottery/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/clynch37/WebLottery.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite src",
+    "build": "vite build"
+  },
+  "dependencies": {
+    "vite": "^8.0.16"
+  }
+}
