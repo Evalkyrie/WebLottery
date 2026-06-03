@@ -13,7 +13,7 @@ var spendings = 0;
 var winnings = 0;
 var ticket = 0;
 var powerball = false;
-var x = 5;
+var pbResult = 0;
 
 // Variables for the UI Elements (radio buttons, textboxes)
 var picks = document.getElementById('picks');
@@ -24,6 +24,7 @@ var standard = document.getElementById("Standard");
 var mega = document.getElementById("Mega");
 var power = document.getElementById("Powerball");
 var pbPick = document.getElementById("pbPick");
+var summary = document.getElementById("summary");
 
 document.getElementById('PLAY').addEventListener('click', () => {
     won = 0;
@@ -31,7 +32,7 @@ document.getElementById('PLAY').addEventListener('click', () => {
     pickList = picks.value.split(' ');
     picklength = Object.keys(pickList).length;
     //alert('I got clicked!');
-    picks.style.color = 'red';
+    // picks.style.color = 'red';
     for (let i = 0; i < ticketPicks[ticket]; i++) {
         results[i] = Math.floor(Math.random() * (ticketRanges[ticket] - 1 + 1) + 1).toString();
         // alert("hello")
@@ -42,11 +43,28 @@ document.getElementById('PLAY').addEventListener('click', () => {
             // alert("comparing " + pickList[j] + " with " + results[i]);
         }
     }
+
+    if (powerball) {
+        pbResult = Math.floor(Math.random() * (10 - 1 + 1) + 1).toString();
+        if (pbPick.value == pbResult) {
+            won += 10;
+        }
+    }
+
     winnings += won;
     loss = ticketPrices[ticket];
+    if (powerball) {
+        loss += 2;
+    }
     spendings += loss;
-    result.innerHTML = results.join(" ");
 
+    result.innerHTML = results.join(" ");
+    if (powerball) {
+        result.innerHTML += "<br>Powerball: " + pbResult;
+    }
+    
+    summary.innerHTML = `<b>Spent:</b> $${spendings}<br><b>Winnings:</b> $${winnings}<br><b>Profit:</b> $` + (winnings - spendings);
+    
     if (won > loss)
     {
         outcome.innerHTML = "You Won $" + (won - loss) + "!";
@@ -69,17 +87,17 @@ document.getElementById('ticketType').addEventListener('click', () => {
 var radios = document.forms["ticketType"].elements["ticket"];
 function getTicket() {
     if (basic.checked) {
-        picks.setAttribute('placeholder', 'Basic - Pick 3');
+        picks.setAttribute('placeholder', '## ## ##');
         ticket = 0;
     } else if (standard.checked) {
-        picks.setAttribute('placeholder', 'Standard - Pick 5');
+        picks.setAttribute('placeholder', '## ## ## ## ##');
         ticket = 1;
     } else if (mega.checked) {
-        picks.setAttribute('placeholder', 'Mega - Pick 6');
+        picks.setAttribute('placeholder', '## ## ## ## ## ##');
         ticket = 2;
     }
     if (power.checked) {
-        pbPick.setAttribute('placeholder', "Powerball");
+        pbPick.setAttribute('placeholder', "Powerball ##");
         pbPick.removeAttribute('readonly');
         pbPick.removeAttribute('hidden');
         powerball = true;
