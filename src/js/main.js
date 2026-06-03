@@ -101,7 +101,7 @@ function getTicket() {
         ticket = 2;
     }
     if (power.checked) {
-        pbPick.setAttribute('placeholder', "Powerball ##");
+        pbPick.setAttribute('placeholder', "Powerball #");
         pbPick.removeAttribute('readonly');
         pbPick.removeAttribute('hidden');
         powerball = true;

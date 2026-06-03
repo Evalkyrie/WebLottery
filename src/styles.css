@@ -1,0 +1,28 @@
+html {
+    background-color:#0E0E10;
+}
+
+.uk-card {
+    background-color: #18181B;
+    color: #EFEFF1;
+}
+
+.uk-article-meta {
+    color: #D3D3D9;
+}
+
+.uk-input {
+    background-color: #26262C;
+    color: #EFEFF1;
+}
+
+.uk-input:focus {
+    background-color: #26262C;
+    border-color: #2A84ED;
+    color: #EFEFF1;
+}
+
+.evalkyrie {
+    background-color: #D3D3D9;
+    color: #18181B;
+}
