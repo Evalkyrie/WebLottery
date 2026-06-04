@@ -123,19 +123,23 @@ var radios = document.forms["ticketType"].elements["ticket"];
 function getTicket() {
     if (basic.checked) {
         picks.setAttribute('placeholder', '# # #');
+        picks.setAttribute('maxlength', '8');
         picks.value = '';
         ticket = 0;
     } else if (standard.checked) {
         picks.setAttribute('placeholder', '# # # # #');
+        picks.setAttribute('maxlength', '14');
         picks.value = '';
         ticket = 1;
     } else if (mega.checked) {
         picks.setAttribute('placeholder', '# # # # # #');
+        picks.setAttribute('maxlength', '17');
         picks.value = '';
         ticket = 2;
     }
     if (power.checked) {
         pbPick.setAttribute('placeholder', "Powerball #");
+        pbPick.setAttribute('maxlength', '2');
         pbPick.removeAttribute('readonly');
         pbPick.removeAttribute('hidden');
         powerball = true;
