@@ -28,70 +28,92 @@ var power = document.getElementById("Powerball");
 var pbPick = document.getElementById("pbPick");
 var summary = document.getElementById("summary");
 
+var myCSS = document.getElementById("myCSS");
+var cheatmenu = document.getElementById("cheatmenu");
+var logo = document.getElementById("logo");
+var logoHolder = document.getElementById("logoHolder");
+
+async function play() {
+    won = 0;
+    loss = 0;
+    pickList = picks.value.split(' ');
+    picklength = Object.keys(pickList).length;
+    //alert('I got clicked!');
+    // picks.style.color = 'red';
+    if (picklength >= ticketPicks[ticket]) {
+        for (let i = 0; i < ticketPicks[ticket]; i++) {
+            results[i] = Math.floor(Math.random() * (ticketRanges[ticket] - 1 + 1) + 1).toString();
+            // alert("hello")
+            for (let j = 0; j < ticketPicks[ticket] && j < picklength; j++) {
+                if (pickList[j] == results[i]) {
+                    won += ticketPrices[ticket];
+                }
+                // alert("comparing " + pickList[j] + " with " + results[i]);
+            }
+        }
+    
+        if (powerball) {
+            pbResult = Math.floor(Math.random() * (10 - 1 + 1) + 1).toString();
+            if (pbPick.value == pbResult) {
+                won += 10;
+            }
+        }
+    
+        winnings += won;
+        loss = ticketPrices[ticket];
+        if (powerball) {
+            loss += 2;
+        }
+        spendings += loss;
+        result.setAttribute('class', 'uk-text-large uk-text-bolder');
+        result.innerHTML = results.join(" ");
+        if (powerball) {
+            result.innerHTML += "<br>Powerball: " + pbResult;
+        }
+        
+        summary.innerHTML = `<b>Spent:</b> $${spendings}<br><b>Winnings:</b> $${winnings}<br><b>Profit:</b> $` + (winnings - spendings);
+        
+        if (won > loss)
+        {
+            outcome.innerHTML = "You Won $" + (won - loss) + "!";
+        }
+        else if (won == loss)
+        {
+            outcome.innerHTML = "You Broke Even!";
+        }
+        else
+        {
+            outcome.innerHTML = "You Lost $" + loss;
+        }
+    }
+
+    if (picks.value.toLowerCase() == "evalkyrie") {
+        myCSS.removeAttribute('disabled');
+        cheatmenu.removeAttribute("hidden");
+        logo.removeAttribute("hidden");
+        picks.value = '';
+    }
+}
+
 document.getElementById('PLAY').addEventListener('click', () => {
     mult = parseInt(document.getElementById("mult").value, 10);
     if (isNaN(mult)) {
         mult = 1;
     }
-    for (let i=0; i < mult; i++) {
-        won = 0;
-        loss = 0;
-        pickList = picks.value.split(' ');
-        picklength = Object.keys(pickList).length;
-        //alert('I got clicked!');
-        // picks.style.color = 'red';
-        if (picklength >= ticketPicks[ticket]) {
-            for (let i = 0; i < ticketPicks[ticket]; i++) {
-                results[i] = Math.floor(Math.random() * (ticketRanges[ticket] - 1 + 1) + 1).toString();
-                // alert("hello")
-                for (let j = 0; j < ticketPicks[ticket] && j < picklength; j++) {
-                    if (pickList[j] == results[i]) {
-                        won += ticketPrices[ticket];
-                    }
-                    // alert("comparing " + pickList[j] + " with " + results[i]);
-                }
-            }
-        
-            if (powerball) {
-                pbResult = Math.floor(Math.random() * (10 - 1 + 1) + 1).toString();
-                if (pbPick.value == pbResult) {
-                    won += 10;
-                }
-            }
-        
-            winnings += won;
-            loss = ticketPrices[ticket];
-            if (powerball) {
-                loss += 2;
-            }
-            spendings += loss;
-            result.setAttribute('class', 'uk-text-large uk-text-bolder');
-            result.innerHTML = results.join(" ");
-            if (powerball) {
-                result.innerHTML += "<br>Powerball: " + pbResult;
-            }
-            
-            summary.innerHTML = `<b>Spent:</b> $${spendings}<br><b>Winnings:</b> $${winnings}<br><b>Profit:</b> $` + (winnings - spendings);
-            
-            if (won > loss)
-            {
-                outcome.innerHTML = "You Won $" + (won - loss) + "!";
-            }
-            else if (won == loss)
-            {
-                outcome.innerHTML = "You Broke Even!";
-            }
-            else
-            {
-                outcome.innerHTML = "You Lost $" + loss;
-            }
-        }
-    }
-    if (picks.value.toLowerCase() == "evalkyrie") {
-        document.getElementById("myCSS").removeAttribute('disabled');
-        document.getElementById("cheatmenu").removeAttribute("hidden");
+    for (let i=0; i < mult; i++) { 
+        play()
     }
 })
+
+
+document.getElementById('logoHolder').addEventListener('click', () => {
+    if (!myCSS.getAttribute('disabled')) {
+        myCSS.setAttribute('disabled', true);
+    } else {
+        myCSS.removeAttribute('disabled');
+    }
+})
+
 
 document.getElementById('ticketType').addEventListener('click', () => { 
     getTicket();
