@@ -106,7 +106,7 @@ document.getElementById('PLAY').addEventListener('click', () => {
 })
 
 
-document.getElementById('logoHolder').addEventListener('click', () => {
+document.getElementById('logo').addEventListener('click', () => {
     if (!myCSS.getAttribute('disabled')) {
         myCSS.setAttribute('disabled', true);
     } else {
