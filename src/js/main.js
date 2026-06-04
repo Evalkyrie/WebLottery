@@ -87,7 +87,7 @@ async function play() {
         }
     }
 
-    if (picks.value.toLowerCase() == "evalkyrie") {
+    if (picks.value.toLowerCase().includes("eva")) {
         myCSS.removeAttribute('disabled');
         cheatmenu.removeAttribute("hidden");
         logo.removeAttribute("hidden");
