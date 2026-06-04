@@ -60,7 +60,7 @@ button:hover {
 button:active {
     bottom: -3px;
 }
-
+/* 
 div {
     position: relative;
     bottom: 0;
@@ -73,4 +73,4 @@ div:hover {
 
 div:active {
     bottom: -5px;
-}
+} */
